@@ -147,7 +147,7 @@ ___
 {
   "id": 1,
   "name": "example.txt",
-  "content": "SGVsbG8gd29ybGQhCg==",  // base64-кодированный контент
+  "content": "SGVsbG8gd29ybGQhCg==", 
   "created_at": "2025-05-20T14:00:00Z"
 }
 
