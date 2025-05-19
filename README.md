@@ -3,6 +3,23 @@
 † created by **Mikael Oganesian** aka **15lu.Akari** †
 
 ___
+## Оглавление
+
+- [File Analysis Service](#file-analysis-service)
+  - [Описание](#описание)
+  - [Архитектура](#архитектура)
+  - [API](#api)
+    - [POST /analyze](#post-analyze)
+    - [GET /reportsid](#get-reportsid)
+- [File Storing Service](#file-storing-service)
+  - [Описание](#описание-1)
+  - [Архитектура](#архитектура-1)
+  - [API](#api-1)
+    - [POST /upload](#post-upload)
+    - [GET /files](#get-files)
+    - [GET /filesid](#get-filesid)
+
+___
 
 # File Analysis Service
 
