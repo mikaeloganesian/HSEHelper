@@ -1,6 +1,6 @@
 # HSE Helper
-    HSE Helper is second large homework by discipline "SC", 2'd course.
-† created by **15lu.Akari** †
+    HSE Helper — это учебный проект, разработанный для автоматизации обработки и анализа студенческих письменных работ.
+† created by **Mikael Oganesian** aka **15lu.Akari** †
 
 ___
 
