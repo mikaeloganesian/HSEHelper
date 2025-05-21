@@ -41,9 +41,9 @@ func UploadFile(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "File uploaded successfully",
-		"id":      newFile.ID,
-		"name":    newFile.Name,
-		"created": newFile.CreatedAt,
+		"message":    "File uploaded successfully",
+		"id":         newFile.ID,
+		"name":       newFile.Name,
+		"created_at": newFile.CreatedAt,
 	})
 }
