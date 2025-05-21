@@ -1,0 +1,37 @@
+package main
+
+import (
+	"log"
+	"os"
+
+	"github.com/gin-gonic/gin"
+
+	"gateway/config"
+	"gateway/handlers"
+)
+
+func main() {
+	// Загрузка .env
+	config.LoadEnv()
+
+	// Инициализация роутера
+	router := gin.Default()
+
+	// Роуты
+	router.POST("/upload", handlers.UploadFile)
+	router.GET("/files", handlers.ListFiles)
+	router.GET("/files/:id", handlers.GetFile)
+	router.POST("/analyze", handlers.AnalyzeFile)
+	router.GET("/reports/:id", handlers.GetReport)
+
+	// Запуск сервера
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Printf("Gateway listening on port %s", port)
+	if err := router.Run(":" + port); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
+}

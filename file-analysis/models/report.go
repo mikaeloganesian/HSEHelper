@@ -15,11 +15,11 @@ type AnalyzeResponse struct {
 }
 
 type Report struct {
-	ID         int
-	FileName   string
-	Paragraphs int
-	Words      int
-	Characters int
-	Hash       string
-	CreatedAt  time.Time
+	ID         int       `json:"id" db:"id"`
+	FileName   string    `json:"file_name" db:"file_name"`
+	Paragraphs int       `json:"paragraphs" db:"paragraphs"`
+	Words      int       `json:"words" db:"words"`
+	Characters int       `json:"characters" db:"characters"`
+	Hash       string    `json:"hash" db:"hash"`
+	CreatedAt  time.Time `json:"created_at" db:"created_at"`
 }
