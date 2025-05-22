@@ -19,7 +19,6 @@ import (
 // @Failure      400 {object} gin.H "Bad request"
 // @Failure      500 {object} gin.H "Internal server error"
 // @Router       /analyze [post]
-
 func AnalyzeFile(c *gin.Context) {
 	var req services.AnalyzeRequest
 	fmt.Print(req)

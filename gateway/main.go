@@ -5,11 +5,14 @@
 // @BasePath /
 
 // @schemes http
+
 package main
 
 import (
 	"log"
 	"os"
+
+	_ "gateway/docs" //
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"

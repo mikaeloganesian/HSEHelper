@@ -42,7 +42,6 @@ func UploadFile(c *gin.Context) {
 // @Failure      400 {object} gin.H "Bad request"
 // @Failure      500 {object} gin.H "Internal server error"
 // @Router       /upload [post]
-
 func UploadAndAnalyze(c *gin.Context) {
 	// 1. Получение файла от пользователя
 	fileHeader, err := c.FormFile("file")

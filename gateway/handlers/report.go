@@ -18,7 +18,6 @@ import (
 // @Failure      400 {object} gin.H "Bad request"
 // @Failure      500 {object} gin.H "Internal server error"
 // @Router       /reports/{id} [get]
-
 func GetReport(c *gin.Context) {
 	id := c.Param("id")
 
