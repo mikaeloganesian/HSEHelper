@@ -18,7 +18,7 @@ func main() {
 	router := gin.Default()
 
 	// Роуты
-	router.POST("/upload", handlers.UploadFile)
+	router.POST("/upload", handlers.UploadAndAnalyze)
 	router.GET("/files", handlers.ListFiles)
 	router.GET("/files/:id", handlers.GetFile)
 	router.POST("/analyze", handlers.AnalyzeFile)
