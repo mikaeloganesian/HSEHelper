@@ -8,6 +8,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type UploadAnalysisResponse struct {
+	Analysis  services.AnalyzeResponse `json:"analysis"`
+	FileID    int                      `json:"file_id"`
+	FileName  string                   `json:"file_name"`
+	CreatedAt string                   `json:"created_at"`
+}
+
 func UploadFile(c *gin.Context) {
 	file, err := c.FormFile("file")
 	if err != nil {
@@ -23,6 +30,18 @@ func UploadFile(c *gin.Context) {
 
 	c.JSON(http.StatusOK, result)
 }
+
+// UploadAndAnalyze godoc
+// @Summary      Upload and analyze file
+// @Description  Upload a file and analyze its content, saving the result and byte stream to file-storing
+// @Tags         File Upload
+// @Accept       multipart/form-data
+// @Produce      json
+// @Param        file formData file true "File to upload"
+// @Success      200 {object} services.UploadAnalysisResponse "File upload and analysis successful"
+// @Failure      400 {object} gin.H "Bad request"
+// @Failure      500 {object} gin.H "Internal server error"
+// @Router       /upload [post]
 
 func UploadAndAnalyze(c *gin.Context) {
 	// 1. Получение файла от пользователя

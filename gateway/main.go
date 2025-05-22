@@ -1,3 +1,10 @@
+// @title HSE Helper Gateway API
+// @version 1.0
+// @description Gateway для взаимодействия с file-storing и file-analysis
+// @host localhost:8080
+// @BasePath /
+
+// @schemes http
 package main
 
 import (
@@ -5,12 +12,15 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 
 	"gateway/config"
 	"gateway/handlers"
 )
 
 func main() {
+
 	// Загрузка .env
 	config.LoadEnv()
 
@@ -23,6 +33,7 @@ func main() {
 	router.GET("/files/:id", handlers.GetFile)
 	router.POST("/analyze", handlers.AnalyzeFile)
 	router.GET("/reports/:id", handlers.GetReport)
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Запуск сервера
 	port := os.Getenv("PORT")

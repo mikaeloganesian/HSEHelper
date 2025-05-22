@@ -7,7 +7,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GET /reports/:id
+// GetReport godoc
+// @Summary      Get analysis report by ID
+// @Description  Fetch an analysis report from file-analysis by its ID
+// @Tags         Report Get
+// @Accept       json
+// @Produce      json
+// @Param        id path string true "Report ID"
+// @Success      200 {object} services.Report "Report fetched successfully"
+// @Failure      400 {object} gin.H "Bad request"
+// @Failure      500 {object} gin.H "Internal server error"
+// @Router       /reports/{id} [get]
+
 func GetReport(c *gin.Context) {
 	id := c.Param("id")
 
