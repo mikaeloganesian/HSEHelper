@@ -30,6 +30,13 @@ type Report struct {
 	CreatedAt  string `json:"created_at"`
 }
 
+type UploadAnalysisResponse struct {
+	Analysis  AnalyzeResponse `json:"analysis"`
+	FileID    int             `json:"file_id"`
+	FileName  string          `json:"file_name"`
+	CreatedAt string          `json:"created_at"`
+}
+
 func AnalyzeText(req AnalyzeRequest) (*AnalyzeResponse, error) {
 	payload, err := json.Marshal(req)
 	if err != nil {

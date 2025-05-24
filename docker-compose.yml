@@ -1,0 +1,65 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:15
+    container_name: plagiarism-postgres
+    environment:
+      POSTGRES_USER: plagiarism
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: plagiarismdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - hse-net
+
+  file-storing:
+    build:
+      context: ./file-storing
+    container_name: file-storing
+    ports:
+      - "8082:8082"
+    environment:
+      - PORT=8082
+      - DATABASE_URL=postgres://plagiarism:secret@db:5432/plagiarismdb
+    depends_on:
+      - db
+    networks:
+      - hse-net
+
+  file-analysis:
+    build:
+      context: ./file-analysis
+    container_name: file-analysis
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+      - DATABASE_URL=postgres://plagiarism:secret@db:5432/plagiarismdb
+    depends_on:
+      - db
+    networks:
+      - hse-net
+
+  gateway:
+    build:
+      context: ./gateway
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./gateway/.env
+    depends_on:
+      - file-storing
+      - file-analysis
+    networks:
+      - hse-net
+
+volumes:
+  pgdata:
+
+networks:
+  hse-net:
+    driver: bridge

@@ -1,4 +1,197 @@
+basePath: /
+definitions:
+  services.AnalyzeRequest:
+    properties:
+      file_name:
+        type: string
+      text:
+        type: string
+    type: object
+  services.AnalyzeResponse:
+    properties:
+      characters:
+        type: integer
+      is_plagiarized:
+        type: boolean
+      paragraphs:
+        type: integer
+      words:
+        type: integer
+    type: object
+  services.FileResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+  services.Report:
+    properties:
+      characters:
+        type: integer
+      created_at:
+        type: string
+      file_name:
+        type: string
+      hash:
+        type: string
+      id:
+        type: integer
+      paragraphs:
+        type: integer
+      words:
+        type: integer
+    type: object
+  services.UploadAnalysisResponse:
+    properties:
+      analysis:
+        $ref: '#/definitions/services.AnalyzeResponse'
+      created_at:
+        type: string
+      file_id:
+        type: integer
+      file_name:
+        type: string
+    type: object
+host: localhost:8080
 info:
   contact: {}
-paths: {}
+  description: Gateway для взаимодействия с file-storing и file-analysis
+  title: HSE Helper Gateway API
+  version: "1.0"
+paths:
+  /analyze:
+    post:
+      consumes:
+      - application/json
+      description: Analyze the content of a file and return the analysis result
+      parameters:
+      - description: Analyze request
+        in: body
+        name: analyzeRequest
+        required: true
+        schema:
+          $ref: '#/definitions/services.AnalyzeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Analysis successful
+          schema:
+            $ref: '#/definitions/services.AnalyzeResponse'
+        "400":
+          description: Bad request
+          schema: {}
+        "500":
+          description: Internal server error
+          schema: {}
+      summary: Analyze file content
+      tags:
+      - File Analysis
+  /files:
+    get:
+      consumes:
+      - application/json
+      description: Fetch a list of all files from file-storing
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: List of files
+          schema:
+            items:
+              $ref: '#/definitions/services.FileResponse'
+            type: array
+        "500":
+          description: Internal server error
+          schema: {}
+      summary: List all files
+      tags:
+      - File Get
+  /files/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Fetch a file from file-storing by its ID and stream it to the client
+      parameters:
+      - description: File ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: File content
+          schema:
+            type: file
+        "400":
+          description: Bad request
+          schema: {}
+        "500":
+          description: Internal server error
+          schema: {}
+      summary: Get file by ID
+      tags:
+      - File Get
+  /reports/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Fetch an analysis report from file-analysis by its ID
+      parameters:
+      - description: Report ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Report fetched successfully
+          schema:
+            $ref: '#/definitions/services.Report'
+        "400":
+          description: Bad request
+          schema: {}
+        "500":
+          description: Internal server error
+          schema: {}
+      summary: Get analysis report by ID
+      tags:
+      - Report Get
+  /upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload a file and analyze its content, saving the result and byte
+        stream to file-storing
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: File upload and analysis successful
+          schema:
+            $ref: '#/definitions/services.UploadAnalysisResponse'
+        "400":
+          description: Bad request
+          schema: {}
+        "500":
+          description: Internal server error
+          schema: {}
+      summary: Upload and analyze file
+      tags:
+      - File Upload
+schemes:
+- http
 swagger: "2.0"

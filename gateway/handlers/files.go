@@ -17,8 +17,8 @@ import (
 // @Produce      json
 // @Param        id path string true "File ID"
 // @Success      200 {file} string "File content"
-// @Failure      400 {object} gin.H "Bad request"
-// @Failure      500 {object} gin.H "Internal server error"
+// @Failure      400 {object} interface{} "Bad request"
+// @Failure      500 {object} interface{} "Internal server error"
 // @Router       /files/{id} [get]
 func GetFile(c *gin.Context) {
 	id := c.Param("id")
@@ -59,7 +59,7 @@ func GetFile(c *gin.Context) {
 // @Accept       json
 // @Produce      json
 // @Success      200 {array} services.FileResponse "List of files"
-// @Failure      500 {object} gin.H "Internal server error"
+// @Failure      500 {object} interface{} "Internal server error"
 // @Router       /files [get]
 func ListFiles(c *gin.Context) {
 	files, err := services.ListFiles()

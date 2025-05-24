@@ -15,8 +15,8 @@ import (
 // @Produce      json
 // @Param        id path string true "Report ID"
 // @Success      200 {object} services.Report "Report fetched successfully"
-// @Failure      400 {object} gin.H "Bad request"
-// @Failure      500 {object} gin.H "Internal server error"
+// @Failure      400 {object} interface{} "Bad request"
+// @Failure      500 {object} interface{} "Internal server error"
 // @Router       /reports/{id} [get]
 func GetReport(c *gin.Context) {
 	id := c.Param("id")

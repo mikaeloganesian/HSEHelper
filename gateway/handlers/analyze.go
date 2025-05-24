@@ -16,8 +16,8 @@ import (
 // @Produce      json
 // @Param        analyzeRequest body services.AnalyzeRequest true "Analyze request"
 // @Success      200 {object} services.AnalyzeResponse "Analysis successful"
-// @Failure      400 {object} gin.H "Bad request"
-// @Failure      500 {object} gin.H "Internal server error"
+// @Failure      400 {object} interface{} "Bad request"
+// @Failure      500 {object} interface{} "Internal server error"
 // @Router       /analyze [post]
 func AnalyzeFile(c *gin.Context) {
 	var req services.AnalyzeRequest
