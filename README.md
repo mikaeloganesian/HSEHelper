@@ -4,7 +4,6 @@
 
 ___
 ## Оглавление
-
 - [File Analysis Service](#file-analysis-service)
   - [Описание](#описание)
   - [Архитектура](#архитектура)
@@ -18,6 +17,15 @@ ___
     - [POST /upload](#post-upload)
     - [GET /files](#get-files)
     - [GET /filesid](#get-filesid)
+- [Gateway Proxy](#gateway-proxy)
+  - [Описание](#описание-2)
+  - [Архитектура](#архитектура-2)
+  - [API](#api-2)
+    - [POST /upload](#post-upload-1)
+    - [GET /files](#get-files-1)
+    - [GET /filesid](#get-filesid-1)
+    - [GET /analyze](#get-analyze)
+    - [GET /reportsid](#get-reportsid-1)
 
 ___
 
